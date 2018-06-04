@@ -8,7 +8,7 @@ Some part actions are shown as follows:
 ![](https://github.com/ZhichenZhao/part-action-network/raw/master/imgs/parts.jpg)
 
 ## Part actions
-we define 5 kinds of parts: head, torso, lower body, two arms and two hands. For each of them, we define some actions, such as "head: lokking up", "hand: half holding" etc.
+we define 5 kinds of parts: head, torso, lower body, two arms and two hands. For each of them, we define some actions, such as "head: looking up", "hand: half holding" etc.
 
 |index|part|action|index|part|action|
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|

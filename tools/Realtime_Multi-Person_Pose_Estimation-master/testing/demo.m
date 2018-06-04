@@ -56,13 +56,13 @@ savePath = 'result_stanford40_trainval';
 for i=1:length(cat_dict)
     cat_name = cat_dict{i}{1};
     cat_num = cat_dict{i}{2};
-    pics = dir(['/space3/water/datasets/Stanford40/BboxImage/' cat_name]);
+    pics = dir(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/' cat_name]);
     pics = pics(3:end);
-    
+    cat_num = length(pics)
     for m = 1:cat_num
     im_name = pics(m).name;
     
-    oriImg = imread(['/space3/water/datasets/Stanford40/BboxImage/' cat_name '/' im_name]);
+    oriImg = imread(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/' cat_name '/' im_name]);
     
     scale0 = 368/size(oriImg, 1);
     twoLevel = 1;
@@ -77,6 +77,8 @@ for i=1:length(cat_dict)
     boxes = genBbox(oriImg, candidates,subset,a(10:end,:),vis);
     
     if(~exist(fullfile(savePath, cat_name))) mkdir(fullfile(savePath, cat_name)); end
-    save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.mat'],'boxes');
+    save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.jpg'],'boxes');
+
+    %save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.mat'],'boxes');
     end
 end
