@@ -2,7 +2,7 @@ function param = config(id)
 %% set this part
 
 % GPU device number (doesn't matter for CPU mode)
-GPUdeviceNumber = 1;
+GPUdeviceNumber = 0;
 
 % Select model (default: 5)
 param.modelID = id;
@@ -41,7 +41,7 @@ param.merge = 'avg';
 
 
 % path of your caffe
-caffepath = '/space3/water/ctx/ctx/caffe-master/matlab';
+caffepath = '/home/hci-jw/caffe/matlab';
 
 %COCO parameter
 if id == 1

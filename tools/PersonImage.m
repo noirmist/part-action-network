@@ -44,7 +44,7 @@ class={
 'writing_on_a_book'};
 %% read the data
 for k=1:40
-fid=fopen(['/w/datasets/stanford40/stanford40/ImageSplits/', class{k}, '_test.txt']);
+fid=fopen(['/home/hci-jw/workspace/part-action-network/data/stanford40/ImageSplits/', class{k}, '_test.txt']);
 num=1;
 while(~feof(fid))
 nn=fscanf(fid,'%s',1); 
@@ -61,8 +61,8 @@ fclose(fid);
 num=num-1;
 boundingbox=zeros(num,4);
 %% extract bndbox from xml files
-imgdir= '/w/datasets/stanford40/stanford40/JPEGImages';
-annodir='/w/datasets/stanford40/stanford40/XMLAnnotations';
+imgdir= '/home/hci-jw/workspace/part-action-network/data/stanford40/JPEGImages';
+annodir='/home/hci-jw/workspace/part-action-network/data/stanford40/XMLAnnotations';
 num=num-1;
 for m=1:num
 x=xmlread(fullfile(annodir,[name{m},'.xml']));
@@ -97,7 +97,7 @@ boundingbox(m,:)=bnd(1,:);
 end
 
 %% resize and store new image
-storepat='/u/water/research/stanford40_boundingbox/';
+storepat='/home/hci-jw/workspace/part-action-network/data/stanford40/bbox_data/';
 ff=fopen([storepat class{k} '_test']);
 if(ff==-1)
     mkdir([storepat class{k} '_test']);
@@ -115,23 +115,4 @@ for m=1:num
 end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-        
-        
-        
         
