@@ -15,14 +15,15 @@ net = caffe.Net(model.deployFile, model.caffemodel, 'test');
 %%
 id=0;
 close all;
-savePath = '/space3/water/datasets/Stanford40/PartImages/';
+savePath = '/home/hci-jw/workspace/part-action-network/data/stanford40/PartImages/';
 
-pics = dir(['/space3/water/datasets/Stanford40/BboxImages']);
+pics = dir(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage']);
 pics = pics(3:end);
     
 for m = 1:length(pics)
     im_name = pics(m).name;
-    oriImg = imread(['/space3/water/datasets/Stanford40/BboxImages/' im_name]);
+    im_name;
+    oriImg = imread(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/' im_name]);
     disp(im_name);
     if(size(oriImg,2)/2>size(oriImg,1))
          scale0 = 368/max(size(oriImg, 2));

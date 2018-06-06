@@ -44,7 +44,7 @@ class={
 'writing_on_a_book'};
 %% read the data
 for k=1:40
-fid=fopen(['/home/hci-jw/workspace/part-action-network/data/stanford40/ImageSplits/', class{k}, '_test.txt']);
+fid=fopen(['/home/hci-jw/workspace/part-action-network/data/stanford40/ImageSplits/', class{k}, '_train.txt']);
 num=1;
 while(~feof(fid))
 nn=fscanf(fid,'%s',1); 
@@ -97,12 +97,12 @@ boundingbox(m,:)=bnd(1,:);
 end
 
 %% resize and store new image
-%storepat='/home/hci-jw/workspace/part-action-network/data/stanford40/bbox_data/';
-storepat='/media/hci-jw/Plextor1tb/workspace/data/test/BBoxImage/';
+%storepat='/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/';
 
-ff=fopen([storepat class{k} '_test']);
+storepat='/media/hci-jw/Plextor1tb/workspace/data/BBoxImage/';
+ff=fopen([storepat class{k} '_train']);
 if(ff==-1)
-    mkdir([storepat class{k} '_test']);
+    mkdir([storepat class{k} '_train']);
 end
 for m=1:num
     %if(label(m)==0)
@@ -110,8 +110,8 @@ for m=1:num
     I=crop50(I,boundingbox(m,:));
     %[im_h,im_w,im_d]=size(I);
     %I = imresize(I, 300/max(im_h, im_w), 'bicubic');
-   
-    imwrite(I,fullfile([storepat class{k} '_test'],[name{m},'.jpg']));
+    resized_I = imresize(I, [224 224]);
+    imwrite(resized_I,fullfile([storepat class{k} '_train'],[name{m},'.jpg']));
    
     %end
 end
