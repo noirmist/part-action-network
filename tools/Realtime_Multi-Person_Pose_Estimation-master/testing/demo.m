@@ -52,33 +52,61 @@ net = caffe.Net(model.deployFile, model.caffemodel, 'test');
  {'writing_on_a_book',		246}};
 
 close all;
-savePath = 'result_stanford40_trainval';
+%savePath = 'result_stanford40_trainval';
+savePath = '/media/hci-jw/Plextor1tb/workspace/data/PartImages/';
 for i=1:length(cat_dict)
     cat_name = cat_dict{i}{1};
     cat_num = cat_dict{i}{2};
-    pics = dir(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/' cat_name]);
+    pics = dir(['/media/hci-jw/Plextor1tb/workspace/data/BBoxImage/' cat_name '_train']);
     pics = pics(3:end);
     cat_num = length(pics)
+    
+    ff=fopen([savePath cat_name '_train']);
+    if(ff==-1)
+        mkdir([savePath cat_name '_train']);
+    end
     for m = 1:cat_num
-    im_name = pics(m).name;
-    
-    oriImg = imread(['/home/hci-jw/workspace/part-action-network/data/stanford40/BBoxImage/' cat_name '/' im_name]);
-    
-    scale0 = 368/size(oriImg, 1);
-    twoLevel = 1;
-    [final_score, ~] = applyModel(oriImg, param, net, scale0, 1, 1, 0, twoLevel);
-    vis = 0;
-    if mode == 1
-        [candidates, subset] = connect56LineVec(oriImg, final_score, param, vis);
-    elseif mode == 2
-        [candidates, subset] = connect43LineVec(oriImg, final_score, param, vis);
-    end
-    a = lines();
-    boxes = genBbox(oriImg, candidates,subset,a(10:end,:),vis);
-    
-    if(~exist(fullfile(savePath, cat_name))) mkdir(fullfile(savePath, cat_name)); end
-    save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.jpg'],'boxes');
+        im_name = pics(m).name;
+        disp(im_name);
 
-    %save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.mat'],'boxes');
+        oriImg = imread(['/media/hci-jw/Plextor1tb/workspace/data/BBoxImage/' cat_name '_train/' im_name]);
+        if(size(oriImg,2)/2>size(oriImg,1))
+             scale0 = 368/max(size(oriImg, 2));
+        else
+            scale0 = 368/max(size(oriImg, 1));
+        end
+        %scale0 = 368/size(oriImg, 1);
+        twoLevel = 1;
+        [final_score, ~] = applyModel(oriImg, param, net, scale0, 1, 1, 0, twoLevel);
+        vis = 0;
+
+        if mode == 1
+            [candidates, subset] = connect56LineVec(oriImg, final_score, param, vis);
+        elseif mode == 2
+            [candidates, subset] = connect43LineVec(oriImg, final_score, param, vis);
+        end
+
+        boxes = genBbox(oriImg, candidates,subset,hsv(7),vis);
+        parts={'head', 'torso', 'legs', 'larm', 'rarm', 'lhand', 'rhand'};
+        for j=1:length(parts)
+            if(isfield(boxes,parts{j}))
+                bbox=getfield(boxes,parts{j});
+                patch=oriImg(bbox(2):bbox(4),bbox(1):bbox(3),:);
+                resized_patch = imresize(patch, [224 224]);
+                imwrite(resized_patch, [savePath cat_name '_train/' im_name(1:end-4) '_' num2str(j) parts{j} '.jpg'], 'jpg');
+                %id=id+1;
+            else
+                patch = im2uint8(zeros(224,224,3)) +128;
+                imwrite(patch, [savePath cat_name '_train/' im_name(1:end-4) '_' num2str(j) parts{j} '.jpg'], 'jpg');
+            end
+            
+        end
     end
-end
+end   
+%     a = lines();
+%     boxes = genBbox(oriImg, candidates,subset,a(10:end,:),vis);
+%     
+%     if(~exist(fullfile(savePath, cat_name))) mkdir(fullfile(savePath, cat_name)); end
+%     %save([fullfile(savePath,cat_name), '/' im_name(1:end-4) '.mat'],'boxes');
+%     end
+%end
