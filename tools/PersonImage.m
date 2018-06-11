@@ -61,7 +61,11 @@ fclose(fid);
 num=num-1;
 boundingbox=zeros(num,4);
 %% extract bndbox from xml files
+<<<<<<< HEAD
 imgdir= '/media/hci-jw/Plextor1tb/workspace/data/JPEGImages';
+=======
+imgdir= '/home/hci-jw/workspace/part-action-network/data/stanford40/JPEGImages';
+>>>>>>> 55741e5576486cc27f725e82257ec09bac8f56a2
 annodir='/home/hci-jw/workspace/part-action-network/data/stanford40/XMLAnnotations';
 num=num-1;
 for m=1:num
