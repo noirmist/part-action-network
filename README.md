@@ -1,6 +1,6 @@
-# part-action-network
+# Part Action Network Tensorflow Implementation.
 
-This project descibes the Part Action Network proposed in our paper in ICCV2017: Single Image Action Recognition using Semantic Part Actions, Zhichen Zhao, Huimin Ma and Shaodi You.
+This project made by tensorflow which descibes the Part Action Network proposed in the paper in ICCV2017: Single Image Action Recognition using Semantic Part Actions, Zhichen Zhao, Huimin Ma and Shaodi You.
 
 In general, the main purpose of this paper is to capture "part action" cues to improve the body action recognition. We view a body action as a combination of several part actions.
 ![](https://github.com/ZhichenZhao/part-action-network/raw/master/imgs/framework.jpg)
@@ -40,7 +40,8 @@ Download the annotations:
 [Annotations](https://drive.google.com/file/d/0B9BLbZk6ZRS0cVdxbGRPQzJHRGs/view?usp=sharing)
 
 ### Models
-you can download the model from my google drive: [PAN of Stanford40](https://drive.google.com/file/d/0B9BLbZk6ZRS0eXVfRThUTGdvdEU/view?usp=sharing)
+you can download the model from my google drive: [PAN of Stanford40 for TF]
+(https://drive.google.com/file/d/1C9nVhlhvOCqRXEayM6p6SzZiKlTHNQEo/view?usp=sharing)
 
 ## Testing
 To test the network, you need to follow the steps:
@@ -48,8 +49,7 @@ To test the network, you need to follow the steps:
 2. Use tools/PersonImage.m to generate bbox images in BBOXImages/(the whole images are stored in JPEGImages/).
 3. Use tools/Realtime_Multi_Person_Pose_Estimation-mater/testing/demo.m to generate parts in PARTImages/, these programs are modified from the Part Affinity Field Network (see citations).
 4. Run test_stanford40/test.py
-## demo
-coming soon
+
 ## Training
 To train the network, you need to use my modified caffe as below at first.
 you can follow the steps to generate your own part action network:
