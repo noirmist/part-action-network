@@ -49,7 +49,12 @@ To test the network, you need to follow the steps:
 2. Use tools/PersonImage.m to generate bbox images in BBOXImages/(the whole images are stored in JPEGImages/).
 3. Use tools/Realtime_Multi_Person_Pose_Estimation-mater/testing/demo.m to generate parts in PARTImages/, these programs are modified from the Part Affinity Field Network (see citations).
 4. Run test_stanford40/test.py
+<<<<<<< HEAD
+## demo
+coming soon
+=======
 
+>>>>>>> 55741e5576486cc27f725e82257ec09bac8f56a2
 ## Training
 To train the network, you need to use my modified caffe as below at first.
 you can follow the steps to generate your own part action network:

@@ -17,6 +17,8 @@ def get_pred_by_batch(net, imgs_in_batch, keys, coefs):
         net.blobs['data'].data[...] = imgs
         out = net.forward()
         for idx, key in enumerate(keys):
+            #idx 0 fc_stanford2 40 nodes fuse result
+            #idx 1 fc_part_act 40 nodes from act branch
             prediction_tmp = out[key][0]
             prediction = [x+coefs[idx]*y/sum_coefs/sum_batch for x,y in zip(prediction,prediction_tmp)]
     return prediction
