@@ -33,6 +33,12 @@ we define 5 kinds of parts: head, torso, lower body, two arms and two hands. For
 
 The part action set we have collected is not perfect now, if you find annotation errors or you have good ideas on how to design the set, please feel free to contact me.
 
+## Prerequisite
+1. matcaffe (caffe and matlab)
+2. tensorflow 
+3. tensorflow-hub
+4. other python library(tqdm, scikit-learn, numpy, opencv-python, python-tk, sklearn)
+
 ## Annotations
 The annotations are provided as "txt" files, in each of them, we label part actions in order of head-torso-lower_body-left_arm-right_arm-left_hand-right_hand. Since in any case you need to locate part locations in the test phase by algprithms, we do not provide part locations in the training set, which keeps consistency for the part localization.
 
@@ -48,21 +54,19 @@ To test the network, you need to follow the steps:
 1. Download the Stanford-40 dataset in data/stanford40
 2. Use tools/PersonImage.m to generate bbox images in BBOXImages/(the whole images are stored in JPEGImages/).
 3. Use tools/Realtime_Multi_Person_Pose_Estimation-mater/testing/demo.m to generate parts in PARTImages/, these programs are modified from the Part Affinity Field Network (see citations).
-4. Run test_stanford40/test.py
-<<<<<<< HEAD
-## demo
-coming soon
-=======
+4. Change every path to your files in pan.py
+5. run python pan.py
+6. The test result automatically generate in test_result_save_folder
 
->>>>>>> 55741e5576486cc27f725e82257ec09bac8f56a2
 ## Training
 To train the network, you need to use my modified caffe as below at first.
 you can follow the steps to generate your own part action network:
-1. Prepare a ResNet-50 model which is trained on ImageNet
-2. Use training/init_pan_network.py to transform ResNet-50 to a initial PAN, where both part appearance branch and part action branch weights are set.
-3. Generate BBOXImages/, JPEGImages/, PARTImages/ folders, as the same procedure in the test phase.
-4. Run caffe train in modified Caffe just as the training schedule in official Caffe. The corresponding solver.prototxt and trainval.prototxt files are arranged in the training/ folder.
-5. Now you can play with the trained model and use it in other scenarios.
+1. Through tensorflow hub ResNet v1-50 automatically loaded.
+2. Generate BBOXImages/, JPEGImages/, PARTImages/ folders, by running tools/PersonImage_train.m , tools/Realtime_Multi-Person_Pose_Estimation-master/testing/demo.m
+3. Change all path to your files in pan.py
+4. Set check_point_file='' in pan.py
+5. Set Train = True in pan.py
+6. Run python pan.py
 
 ### Our modified Caffe
 https://github.com/ZhichenZhao/my-modified-caffe/tree/master
