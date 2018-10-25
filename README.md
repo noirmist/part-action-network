@@ -46,8 +46,15 @@ Download the annotations:
 [Annotations](https://drive.google.com/file/d/0B9BLbZk6ZRS0cVdxbGRPQzJHRGs/view?usp=sharing)
 
 ### Models
-you can download the model from my google drive: [PAN of Stanford40 for TF]
-(https://drive.google.com/file/d/1C9nVhlhvOCqRXEayM6p6SzZiKlTHNQEo/view?usp=sharing)
+you can download the model from my google drive: 
+
+[PAN of Stanford40 for Tensorflow]
+
+https://drive.google.com/file/d/1C9nVhlhvOCqRXEayM6p6SzZiKlTHNQEo/view?usp=sharing
+
+[PAN of Stanford40 for Caffe]
+
+https://drive.google.com/file/d/13sftQWDEd1cYhOYJAWAoQOProl-0FcSL/view?usp=sharing
 
 ## Testing
 To test the network, you need to follow the steps:
